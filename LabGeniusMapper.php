@@ -65,7 +65,7 @@ function lgPlasmidMapRender($input, array $args, Parser $parser, PPFrame $frame 
     }
     $gene_bank = $args['gb-location']; // the genebank location
     
-    // comma seperated list of restrictive enzymes with whitespaces stripped
+    // comma seperated list of restriction enzymes with whitespaces stripped
     $restriction_enzymes = '';
     if (isset($args['restriction-enzymes'])) {
         $restriction_enzymes = preg_replace('/\s+/', '', $args['restriction-enzymes']);
