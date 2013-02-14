@@ -30,7 +30,7 @@ $dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
     pmap is a single tag
     Attributes for pmap tag :-
         * id = an id for the div which encloses the plasmid map
-        * gb-location = 'location of the gene bank file'
+        * gb-location = 'location of the GenBank file'
         * restriction-enzymes = 'comma seperated list of enzymes'
 
     Optional attributes
