@@ -89,15 +89,14 @@ function lgPlasmidMapRender($input, array $args, Parser $parser, PPFrame $frame 
             
             default:
                 // invalid cut type - render out an error
-                $input = `<p>
-                Your cut-type attribute value is impermissible! It can only be one of the following :-
-                <br/>
-                <ul>
+                $input = <<<EOT
+                    <p>Your cut-type attribute value is impermissible! It can only be one of the following :-</p>
+                    <ul>
                     <li>single</li>
                     <li>double</li>
                     <li>all</li>
-                </ul>
-                </p>`;
+                    </ul>
+EOT;
                 return $input;
         }
     }
@@ -107,9 +106,7 @@ function lgPlasmidMapRender($input, array $args, Parser $parser, PPFrame $frame 
     global $wgUseAjax;
     if (!$wgUseAjax) {
         $input = <<<EOT
-<p>
-Can't use ajax since \$wgUseAjax == false
-</p>
+        <p>Can't use ajax since \$wgUseAjax == false</p>
 EOT;
         return $input;
     }
@@ -129,11 +126,40 @@ dataType: 'json',
 success: function(data) {
 data.plasmid_map = data.plasmid_map.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
 var map = $(data.plasmid_map);
-var width = parseInt(map.attr("width"));
-var height = parseInt(map.attr("height"));
-$('#$id').append(data.plasmid_map);
-$('#$id').scrollLeft(width/2-parseInt('$width', 10)/2);
-$('#$id').scrollTop(height/2-parseInt('$height', 10)/2);
+// determine the bounds and crop out the extra whitespace
+var minX, maxX, minY, maxY;
+minX = minY = 10000.0; // we know the svg is not wider than 10000px to be on the safe side
+maxX = maxY = 0.0;
+map.find('text').each(function(i, v) {
+v = $(v);
+var x = parseFloat(v.attr('x'));
+var y = parseFloat(v.attr('y'));
+if (!(isNaN(x) || isNaN(y))) {
+minX = Math.min(minX, x);
+minY = Math.min(minY, y);
+maxX = Math.max(maxX, x);
+maxY = Math.max(maxY, y);
+}
+});
+// add padding around the map
+var padding = 25;
+minX -= padding;
+maxX += padding;
+minY -= padding;
+maxY += padding; 
+var width = map.attr('width'), height = map.attr('height');
+var div = $('#$id');
+div.append(map);
+var divWidth = parseInt('$width', 10), divHeight = parseInt('$height', 10);
+div.scrollLeft(width/2 - divWidth/2);
+div.scrollTop(height/2 - divHeight/2);
+// prevent out of bounds scrolling
+div.scroll(function(e) {
+if (div.scrollTop() < minY) div.scrollTop(minY);
+if (div.scrollTop() > maxY - divHeight) div.scrollTop(maxY - divHeight);
+if (div.scrollLeft() < minX) div.scrollLeft(minX);
+if (div.scrollLeft() > maxX - divWidth) div.scrollLeft(maxX - divWidth);
+});
 }
 });
 </script>
