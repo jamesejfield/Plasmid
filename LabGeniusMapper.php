@@ -114,7 +114,18 @@ EOT;
     $input = <<<EOT
 <script>
 $(function(){
-$.getScript('https://raw.github.com/LabGeniusOpen/Plasmid/develop/plasmidScript.js');
+var url = './extensions/Plasmid/plasmidScript.js';
+$.getScript(url, function() {
+var options = {
+gene_bank: '$gene_bank',
+restriction_enzymes: '$restriction_enzymes',
+radius: $radius,
+cutType: '$cutType',
+width: '$width',
+height: '$height'
+};
+LGRun('$id', options);
+});
 });
 </script>
 <div id="$id" style="width: $width; height: $height; overflow: scroll;">

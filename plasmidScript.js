@@ -37,7 +37,6 @@ function LGRun(id, options) { // accept id of the div and a options hash
             var innerDiv = div.append('<div></div>');
             innerDiv.css('width', maxX - minX).css('height', maxY - minY).css('overflow', 'none');
             innerDiv.append(map);
-            div.append(innerDiv);
             var width = map.attr('width'), height = map.attr('height');
             var divWidth = parseInt(options.width, 10), divHeight = parseInt(options.height, 10);
             div.scrollLeft(width/2 - divWidth/2);
