@@ -75,6 +75,7 @@ function lgPlasmidMapRender($input, array $args, Parser $parser, PPFrame $frame 
     $radius = 140;
     if (isset($args['radius']) && $args['radius'] != '') {
         $radius = intval($args['radius']); // optional radius size for the svg map
+
     }
 
     $cutType = 'double';
@@ -128,7 +129,8 @@ LGRun('$id', options);
 });
 });
 </script>
-<div id="$id" style="width: $width; height: $height; overflow: scroll;">
+
+<div id="$id" style="width:; height:; float: left;">
 </div>
 EOT;
     return $input;

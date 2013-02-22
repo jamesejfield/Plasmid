@@ -2,48 +2,6 @@ function validOffset(v) {
     return v < 0?0:v;
 }
 
-function centreMap(map){
-    // determine the bounds and crop out the extra whitespace
-    var minX, maxX, minY, maxY;
-    minX = minY = 10000.0; // we know the svg is not wider than 10000px to be on the safe side
-    maxX = maxY = 0.0;
-    map.find('text').each(function(i, v) {
-        v = $(v);
-        var x = parseFloat(v.attr('x'));// || parseFloat(v.attr('x1')) || parseFloat(v.attr('x2'));
-        var y = parseFloat(v.attr('y'));
-        if (!isNaN(x) && !isNaN(y)) {
-            minX = Math.min(minX, x-v.width());
-            minY = Math.min(minY, y-v.height());
-            maxX = Math.max(maxX, x+v.width());
-            maxY = Math.max(maxY, y+v.height());
-        }
-    });
-    // add padding around the map
-    var padding = 0;
-    minX -= padding;
-    maxX += padding;
-    minY -= padding;
-    maxY += padding;
-    var width = map.width(), height = map.height();
-    var divWidth = maxX - minX, divHeight = maxY - minY;
-    innerDiv.css('width', divWidth).css('height', divHeight);
-    innerDiv.css('position', 'relative').offset({
-        left: validOffset(options.width - divWidth),
-        top: validOffset(options.height - divHeight)
-    });
-    innerDiv.css('top', validOffset(options.height - divHeight)).css('left', validOffset(options.width - divWidth));
-    scrollDiv.css('width', validOffset(2*options.width - divWidth)).css('height', validOffset(2*options.height - divHeight));
-
-    // scrolling
-    innerDiv.css('overflow', 'scroll');
-    innerDiv.scrollLeft(minX);
-    innerDiv.scrollTop(minY);
-    innerDiv.css('overflow', 'hidden');
-
-    div.scrollLeft(scrollDiv.width()/2 - options.width/2);
-    div.scrollTop(scrollDiv.height()/2 - options.height/2);
-}
-
 function LGRun(id, options) { // accept id of the div and a options hash
     // make an ajax request to fetch the map and replace pmap
     $.ajax({
@@ -61,9 +19,49 @@ function LGRun(id, options) { // accept id of the div and a options hash
             var map = $(data.plasmid_map);
             var div = $('#'+id);
             var innerDiv = $('<div></div>');
-            var scrollDiv = $('<div></div>');
-            div.append(scrollDiv.append(innerDiv.append(map)));
-            centreMap(map)
-        }
-    });
+            div.append(innerDiv.append(map));
+			// determine the bounds and crop out the extra whitespace
+     		var minX, maxX, minY, maxY;
+		    minX = minY = 10000.0; // we know the svg is not wider than 10000px to be on the safe side
+		    maxX = maxY = 0.0;
+		    //map.load(function(){
+		    	map.find('text').each(function(i, v) {
+    		    	v = $(v);
+	    	    	var x = parseFloat(v.attr('x'));// || parseFloat(v.attr('x1')) || parseFloat(v.attr('x2'));
+		    	    var y = parseFloat(v.attr('y'));
+    		    	if (!isNaN(x) && !isNaN(y)) {
+        		    	minX = Math.min(minX, x-v.outerWidth());
+	            		minY = Math.min(minY, y-v.outerHeight());
+				        maxX = Math.max(maxX, x+v.outerWidth());
+				        maxY = Math.max(maxY, y+v.outerHeight());
+        			}
+			    });
+			    console.log(minX,minY,maxX,maxY);
+    			svgHeight = map.height();
+	    	    svgWidth = map.width();
+	        	topTrim = minY-10;
+	    	    bottomTrim = svgHeight - maxY;
+    			leftTrim = minX - 50;
+	    		rightTrim = svgWidth - maxX;
+    			// Trim top and left
+			    map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
+    			// Trim holding Div
+    			var divWidth = maxX - minX, divHeight = maxY - minY;
+		    	innerDiv.css('width', divWidth).css('height', divHeight);
+		    	
+		    	// set height and width values for the outer div
+		    	var divWidth = divWidth + 150 + "px" ; 
+		    	var divHeight = divHeight + 20 + "px" ; 
+		    	// get the div element
+				d = document.getElementById(id);
+				// set the width
+				d.style.width=divWidth;
+				// set the height
+				d.style.height=divHeight;
+		    	
+
+		    	
+	     	//})
+		}
+	});
 }
