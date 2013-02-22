@@ -3,6 +3,10 @@ function validOffset(v) {
 }
 
 function centreMap(map){
+    // determine the bounds and crop out the extra whitespace
+    var minX, maxX, minY, maxY;
+    minX = minY = 10000.0; // we know the svg is not wider than 10000px to be on the safe side
+    maxX = maxY = 0.0;
     map.find('text').each(function(i, v) {
         v = $(v);
         var x = parseFloat(v.attr('x'));// || parseFloat(v.attr('x1')) || parseFloat(v.attr('x2'));
@@ -55,10 +59,6 @@ function LGRun(id, options) { // accept id of the div and a options hash
         success: function(data) {
             data.plasmid_map = data.plasmid_map.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
             var map = $(data.plasmid_map);
-            // determine the bounds and crop out the extra whitespace
-            var minX, maxX, minY, maxY;
-            minX = minY = 10000.0; // we know the svg is not wider than 10000px to be on the safe side
-            maxX = maxY = 0.0;
             var div = $('#'+id);
             var innerDiv = $('<div></div>');
             var scrollDiv = $('<div></div>');
