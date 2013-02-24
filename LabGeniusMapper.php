@@ -129,9 +129,9 @@ LGRun('$id', options);
 });
 });
 </script>
-
-<div id="$id" style="width:; height:; float: left;">
+<div id="$id" style="width:; height:; float:left;">
 </div>
 EOT;
     return $input;
+    
 }
