@@ -129,8 +129,21 @@ LGRun('$id', options);
 });
 });
 </script>
-<div id="$id" style="width:; height:; float:left;">
+<div id="$id" style="width:; height:; float:right; border: 0.5px solid black; ">
+<br>
 </div>
+
+<div id= "Button_$id" style="position:relative; top:; left:; float:right;">
+<b>Cutters</b> 
+<select id= "Cutter_$id" onchange="ButtonCutter();">
+  <option value="single">Single</option>
+  <option value="double">Double</option>
+  <option value="all">Single & Double</option>
+  <option value="none">None</option>
+</select>
+</div>
+
+
 EOT;
     return $input;
     
