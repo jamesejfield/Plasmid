@@ -21,27 +21,30 @@ function LGRun(id, options) { // accept id of the div and a options hash
             var innerDiv = $('<div id="container"></div>');
             div.append(innerDiv.append(map));
             
+            // Compute boundaries of rendered SVG image
             var data = document.getElementById('labgenius_plasmid_map');
             var Box = data.getBBox();
             minX = Box.x;
             minY = Box.y;
             maxX = minX + Box.width;
             maxY = minY + Box.height;
-            
-            svgHeight = map.height();
-            svgWidth = map.width();
+
+            // Compute top trim
             topTrim = minY;
-            bottomTrim = svgHeight - maxY;
-            leftTrim = minX;
-            rightTrim = svgWidth - maxX;
             
+            // Compute bottom trim
+            bottomTrim = map.height() - maxY;
+            
+            // Compute right trim
+            rightTrim = map.width(); - maxX;
+            
+            // Compute left trim
+            leftTrim = minX;
+           
             // Trim top and left
             map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
             
             // set height and width values for the outer div based on the svg bounding box
-            var data=document.getElementById('labgenius_plasmid_map');
-            var Box=data.getBBox() ;
-            console.log(Box);
             var divWidth = Box.width + "px";
             var divHeight = Box.height + "px";
             div.css('width', divWidth).css('height', divHeight);    	
