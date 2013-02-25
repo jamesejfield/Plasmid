@@ -18,7 +18,7 @@ function LGRun(id, options) { // accept id of the div and a options hash
             data.plasmid_map = data.plasmid_map.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
             var map = $(data.plasmid_map);
             var div = $('#'+id);
-            var innerDiv = $('<div id="container"></div>');
+            var innerDiv = $("<div id=" + id + "-InnerDiv" + "></div>");
             div.append(innerDiv.append(map));
             
             // Compute boundaries of rendered SVG image
