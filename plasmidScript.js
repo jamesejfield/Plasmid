@@ -22,8 +22,7 @@ function LGRun(id, options) { // accept id of the div and a options hash
             div.append(innerDiv.append(map));
             
             // Compute boundaries of rendered SVG image
-            var data = document.getElementById('labgenius_plasmid_map');
-            var Box = data.getBBox();
+            var Box = map[0].getBBox();
             minX = Box.x;
             minY = Box.y;
             maxX = minX + Box.width;
