@@ -129,7 +129,9 @@ LGRun('$id', options);
 });
 });
 </script>
-<div id="$id" style="width:; height:; float:right; border: 0.5px solid black; ">
+<div id="$id" style="width:; height:; float:right; border: 1px solid black; ">
+<div align="center"><b>Powered by LabGenius</b></span></div>
+<br>
 <br>
 </div>
 

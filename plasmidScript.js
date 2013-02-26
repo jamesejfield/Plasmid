@@ -46,20 +46,22 @@ function LGRun(id, options) { // accept id of the div and a options hash
             map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
             
             // set height and width values for the outer div based on the svg bounding box
-            var buffer = 50;
-            var divWidth = Box.width + "px";
-            var divHeight = buffer + Box.height + "px";
-            div.css('width', divWidth).css('height', divHeight);    	
-            innerDiv.css('width', divWidth).css('height', divHeight);
+            var topbuffer = 100;
+            var divWidth =  Box.width + "px";
+            var OuterDivHeight = topbuffer + Box.height + "px";
+            var InnerDivHeight = Box.height + "px";
+            div.css('width', divWidth).css('height', OuterDivHeight);    	
+            innerDiv.css('width', divWidth).css('height', InnerDivHeight);
             
             // Find position of outer div
 			var outerDivTop = div[0].offsetTop;
 			var outerDivLeft = div[0].offsetLeft;    
 			
 			// Align buttons within outer div
-			var leftBuffer = 10
+			var leftBuffer = 10 ;
+			var topBuffer = 15 ;
 			var buttonDiv = $('#' + "Button_" +id);
-            buttonDiv.css('top', outerDivTop+'px').css('left', leftBuffer + outerDivLeft+'px');
+            buttonDiv.css('top', topBuffer + outerDivTop+'px').css('left', leftBuffer + outerDivLeft+'px');
             
 	}
 	
