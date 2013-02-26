@@ -6,7 +6,7 @@ $wgExtensionCredits['specialpage'][] = array(
     'name' => 'LabGenius Mapper',
     'version' => 1.0,
     'url' => 'http://ecoliwiki.net/colipedia/index.php/Extension:LabGeniusMapper',
-    'author' => 'Ujjwal Thaakar',
+    'author' => 'Rhys Algar, James Field, Ujjwal Thaakar',
     'descriptionmsg' => 'Magically injects svg plasmid maps',
 );
 
@@ -141,7 +141,7 @@ LGRun('$id', options);
 <select id= "Cutter_$id" onchange="ButtonCutter($id , '$gene_bank' , $radius , '$restriction_enzymes' , value )">
   <option value="single">Single</option>
   <option value="double">Double</option>
-  <option value="all">Single & Double</option>
+  <option value="all">All</option>
   <option value="none">None</option>
 </select>
 </div>

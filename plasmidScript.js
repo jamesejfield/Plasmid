@@ -67,7 +67,7 @@ function LGRun(id, options) { // accept id of the div and a options hash
 
 
 
-
+// The ButtonCutter() function allows the user to specific which restriction enzymes are visible
 function ButtonCutter($id , gene_bank , radius , restriction_enzymes , cutters ) {
 var target = ($id.id + "-InnerDiv") ;
 var target = document.getElementById(target);
@@ -91,9 +91,47 @@ target.removeChild( target.firstChild );
             var map = $(data.plasmid_map);
             var div = document.getElementById($id.id);
             target.appendChild(map[0]); 
-            
-          map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
+         
 
+// Measure the size of the new map
+
+            // Compute boundaries of rendered SVG image
+            var Box = map[0].getBBox();
+            minX = Box.x;
+            minY = Box.y;
+            maxX = minX + Box.width;
+            maxY = minY + Box.height;
+
+// Resize the holding div to cater for the new map
+var topbuffer = 100;
+var HoldingDivHeight = topbuffer + Box.height + "px";
+var HoldingDivWidth = Box.width + "px";
+
+console.log(HoldingDivWidth);
+$id.style.width = HoldingDivWidth;
+$id.style.height = HoldingDivHeight;
+
+
+            // Compute top trim
+            topTrim = minY;
+            
+            // Compute bottom trim
+            bottomTrim = map.height() - maxY;
+            
+            // Compute right trim
+            rightTrim = map.width(); - maxX;
+            
+            // Compute left trim
+            leftTrim = minX;
+           
+            // Trim top and left
+            
+            map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
+
+map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
+
+
+//('width', HoldingDivWidth).css('height', HoldingDivHeight);  
 
              }})
 
