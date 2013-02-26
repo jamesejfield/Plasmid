@@ -68,5 +68,34 @@ function LGRun(id, options) { // accept id of the div and a options hash
 
 
 
-function ButtonCutter() {
+function ButtonCutter($id , gene_bank , radius , restriction_enzymes , cutters ) {
+var target = ($id.id + "-InnerDiv") ;
+var target = document.getElementById(target);
+target.removeChild( target.firstChild );
+
+
+   // make an ajax request to fetch the map and replace pmap
+    $.ajax({
+        url: 'http://www.labgeni.us/api/plasmid_map/?callback=?',
+        cache: true,
+        data: {
+            gb_location: gene_bank , 
+            restriction_enzymes: restriction_enzymes,
+            radius: radius,
+            cut_types: cutters
+            
+        },
+        dataType: 'json',
+        success: function(data) {
+            data.plasmid_map = data.plasmid_map.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+            var map = $(data.plasmid_map);
+            var div = document.getElementById($id.id);
+            target.appendChild(map[0]); 
+            
+          map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
+
+
+             }})
+
 }
+
