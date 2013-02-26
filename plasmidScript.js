@@ -57,12 +57,7 @@ function LGRun(id, options) { // accept id of the div and a options hash
 			var outerDivTop = div[0].offsetTop;
 			var outerDivLeft = div[0].offsetLeft;    
 			
-			// Align buttons within outer div
-			var leftBuffer = 10 ;
-			var topBuffer = 15 ;
-			var buttonDiv = $('#' + "Button_" +id);
-            buttonDiv.css('top', topBuffer + outerDivTop+'px').css('left', leftBuffer + outerDivLeft+'px');
-            
+	
 	}
 	
 });

@@ -111,6 +111,7 @@ EOT;
 EOT;
         return $input;
     }
+
     
     $input = <<<EOT
 <script>
@@ -129,13 +130,10 @@ LGRun('$id', options);
 });
 });
 </script>
-<div id="$id" style="width:; height:; float:right; border: 1px solid black; ">
-<div align="center"><b>Powered by LabGenius</b></span></div>
+<div id="$id" style="width:; height:; float:right; border: 1px solid black; z-index: 0;">
+<div align="center"><b>Powered by</b> <img src="../extensions/Plasmid/Logo.png" alt="LabGenius"> </span></div>
 <br>
-<br>
-</div>
-
-<div id= "Button_$id" style="position:relative; top:; left:; float:right;">
+<div id= "Button_$id" style="position:relative; top:0px; left:10px; z-index: 1;">
 <b>Cutters</b> 
 <select id= "Cutter_$id" onchange="ButtonCutter();">
   <option value="single">Single</option>
@@ -144,9 +142,14 @@ LGRun('$id', options);
   <option value="none">None</option>
 </select>
 </div>
+</div>
+
+
 
 
 EOT;
     return $input;
     
 }
+
+
