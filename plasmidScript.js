@@ -19,7 +19,7 @@ function LGRun() { // accept id of the div and a options hash
             data.plasmid_map = data.plasmid_map.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
             var map = $(data.plasmid_map);
             var div = $('#'+id);
-            div.empty();
+            $("#"+id+"-InnerDiv").remove();
             var innerDiv = $("<div id=" + id + "-InnerDiv" + "></div>");
             div.append(innerDiv.append(map));
             
@@ -44,7 +44,7 @@ function LGRun() { // accept id of the div and a options hash
             leftTrim = minX;
            
             // Trim top and left
-            map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px');
+            map.css('position','relative').css('top','-'+topTrim+'px').css('left','-'+leftTrim+'px').css('z-index', 0);
             
             // set height and width values for the outer div based on the svg bounding box
             var topbuffer = 100;
@@ -53,10 +53,7 @@ function LGRun() { // accept id of the div and a options hash
             var InnerDivHeight = Box.height + "px";
             div.css('width', divWidth).css('height', OuterDivHeight);    	
             innerDiv.css('width', divWidth).css('height', InnerDivHeight);
-            
-            // Find position of outer div
-			var outerDivTop = div[0].offsetTop;
-			var outerDivLeft = div[0].offsetLeft;    
+            $('#Button_'+id).css('position', 'relative').css('top', "-=OuterDivHeight").css('left', "-=divWidth");
 		}
 	});
 }

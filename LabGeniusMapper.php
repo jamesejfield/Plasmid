@@ -119,10 +119,9 @@ LGRun();
 });
 });
 </script>
-<div id="$id" style="width:; height:; float:right; border: 1px solid black; z-index: 0;">
-<div align="center"><b>Powered by</b> <img src="../extensions/Plasmid/Logo.png" alt="LabGenius"> </span></div>
-<br>
+<div id="$id" style="float:right; border: 1px solid black; z-index: 0;">
 <div id= "Button_$id" style="position:relative; top:0px; left:10px; z-index: 1;">
+<div align="center"><b>Powered by</b> <img src="../extensions/Plasmid/Logo.png" alt="LabGenius" /></div>
 <b>Cutters</b> 
 <select id= "Cutter_$id" onchange="ButtonCutter($id , '$gene_bank' , $radius , '$restriction_enzymes' , value )">
 <option value="single">Single</option>
