@@ -48,16 +48,6 @@ function lgPlasmidMapRender($input, array $args, Parser $parser, PPFrame $frame 
     }
     $id = $args['id'];
 
-    $width = 'auto';
-    if (isset($args['width'])) {
-        $width = $args['width'];
-    }
-
-    $height = 'auto';
-    if (isset($args['height'])) {
-        $height = $args['height'];
-    }
-
     // ignore $input and fill it out with out with code to fetch the map and insert it here
     $invalidGBLocation = !filter_var($args['gb-location'], FILTER_VALIDATE_URL);
     if (!isset($args['gb-location']) || $invalidGBLocation) {
@@ -118,38 +108,30 @@ EOT;
 $(function(){
 var url = '../extensions/Plasmid/plasmidScript.js';
 $.getScript(url, function() {
-var options = {
+options = {
 gene_bank: '$gene_bank',
 restriction_enzymes: '$restriction_enzymes',
 radius: $radius,
-cutType: '$cutType',
-width: parseFloat('$width', 10),
-height: parseFloat('$height', 10)
+cutType: '$cutType'
 };
-LGRun('$id', options);
+id = '$id';
+LGRun();
 });
 });
 </script>
-
- 
-
 <div id="$id" style="width:; height:; float:right; border: 1px solid black; z-index: 0;">
 <div align="center"><b>Powered by</b> <img src="../extensions/Plasmid/Logo.png" alt="LabGenius"> </span></div>
 <br>
 <div id= "Button_$id" style="position:relative; top:0px; left:10px; z-index: 1;">
 <b>Cutters</b> 
 <select id= "Cutter_$id" onchange="ButtonCutter($id , '$gene_bank' , $radius , '$restriction_enzymes' , value )">
-  <option value="single">Single</option>
-  <option value="double">Double</option>
-  <option value="all">All</option>
-  <option value="none">None</option>
+<option value="single">Single</option>
+<option value="double" selected="selected">Double</option>
+<option value="all">All</option>
+<option value="none">None</option>
 </select>
 </div>
 </div>
-
-
-
-
 EOT;
     return $input;
     
