@@ -1,7 +1,3 @@
-function validOffset(v) {
-    return v < 0?0:v;
-}
-
 function LGRun() { // accept id of the div and a options hash
    
     // make an ajax request to fetch the map and replace pmap
