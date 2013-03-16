@@ -1,4 +1,4 @@
-function LGRun() { // accept id of the div and a options hash
+function LGRun(gene_bank) { // accept id of the div and a options hash
    
     // make an ajax request to fetch the map and replace pmap
     $.ajax({
@@ -16,7 +16,7 @@ function LGRun() { // accept id of the div and a options hash
             var map = $(data.plasmid_map);
             var div = $('#'+id);
             $("#"+id+"-InnerDiv").remove();
-            var innerDiv = $("<div id=" + id + "-InnerDiv" + "></div>");
+            var innerDiv = $("<div class='glow' onclick=window.open('http://beta.labgeni.us/registries/genbank_from_location/?genbank_location=" + gene_bank + "'); id=" + id + "-InnerDiv" + " style=”cursor:pointer;>");
             div.append(innerDiv.append(map));
             
             
@@ -48,13 +48,16 @@ function LGRun() { // accept id of the div and a options hash
             var OuterDivHeight = topbuffer + Box.height + "px";
             var InnerDivHeight = Box.height + "px";
             div.css('width', divWidth).css('height', OuterDivHeight);    	
-            innerDiv.css('width', divWidth).css('height', InnerDivHeight);
+            innerDiv.css('width', divWidth).css('height', InnerDivHeight).css('overflow', "hidden").css('cursor', "pointer");
             $('#Button_'+id).css('position', 'relative').css('top', "-=OuterDivHeight").css('left', "-=divWidth");
+            
+            
+            
 		}
 	});
 }
 
 function ButtonCutter() {
     options.cutType = $('#Cutter_'+id).val();
-    LGRun();
+    LGRun(options.gene_bank);
 }
