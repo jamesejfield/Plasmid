@@ -102,11 +102,11 @@ EOT;
         return $input;
     }
 
-
+// Note, for testing purposes, the location of the javascript should be changed to - '../extensions/Plasmid/plasmidScript.js'
     $input = <<<EOT
 <script>
 $(function(){
-var url = '../extensions/Plasmid/plasmidScript.js';
+var url = 'https://s3.amazonaws.com/labgeniusstatic/js/mediawikiScript.js';
 $.getScript(url, function() {
 options = {
 gene_bank: '$gene_bank',
@@ -115,13 +115,23 @@ radius: $radius,
 cutType: '$cutType'
 };
 id = '$id';
-LGRun();
+LGRun('$gene_bank');
 });
 });
 </script>
+
+<style type="text/css">
+.glow:hover {
+box-shadow: 0 0 5px 2px #f00;
+-webkit-box-shadow: 0 0 5px 2px #f00;
+-moz-box-shadow: 0 0 5px 2px #f00;
+}
+</style>
+
+
 <div id="$id" style="float:right; border: 1px solid black; z-index: 0;">
 <div id= "Button_$id" style="position:relative; top:0px; left:10px; z-index: 1;">
-<div align="center"><b>Powered by</b> <img src="../extensions/Plasmid/Logo.png" alt="LabGenius" /></div>
+<div align="center"><b>Powered by</b> <a href="http://beta.labgeni.us/welcome/#coliwiki"><img class="glow" src="https://s3.amazonaws.com/labgeniusstatic/Logo.png" alt="LabGenius" /></a></div>
 <b>Cutters</b> 
 <select id= "Cutter_$id" onchange="ButtonCutter($id , '$gene_bank' , $radius , '$restriction_enzymes' , value )">
 <option value="single">Single</option>
